@@ -7,7 +7,12 @@ const name = "Simple";
 
 export const siteTitle = "Next.js Simple Website";
 
-export default function Layout({ children, home }) {
+type TProps = {
+  children: React.ReactNode;
+  home?: boolean;
+};
+
+export default ({ children, home }: TProps) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -62,4 +67,4 @@ export default function Layout({ children, home }) {
       )}
     </div>
   );
-}
+};
