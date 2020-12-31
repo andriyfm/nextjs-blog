@@ -1,8 +1,9 @@
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
+import { getSortedPostsData } from "../lib/post";
 import utilStyles from "../styles/utils.module.css";
 
-export default function Home() {
+export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
@@ -21,6 +22,25 @@ export default function Home() {
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
+
+      <section>
+        {allPostsData.map(({ id, date, title }) => {
+          return (
+            <li key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          );
+        })}
+      </section>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return { props: { allPostsData } };
 }
